@@ -1,2 +1,4 @@
-# web-340
-web-340 Node.js
+# WEB 340 Node.js
+## Contributors
+* Professor Cross
+* Sarah Jean Baptiste
