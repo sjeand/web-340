@@ -20,6 +20,6 @@ function processRequest(req, res){
         });
         res.end(body);
 }
-//Variable to declare 's' to create server. 
+//Variable to declare and to create server. 
 var s = http.createServer(processRequest);
 s.listen(8080);
