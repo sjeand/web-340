@@ -2,6 +2,10 @@
     "name": "api",
     "author": "Professor Cross",
     "private": "true",
+    "productName": "Fiddle Leaf Fig",
+    "productPrice": "$49.99",
+    "origin": "West Africa",
+    "potSize": "3 gallon bucket",
     "dependencies": {
         "express": "^4.17.1"
     }

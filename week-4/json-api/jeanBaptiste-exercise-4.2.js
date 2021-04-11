@@ -15,8 +15,6 @@ var http = require('http');
 
 var app = express();
 
-// Add logger
-//app.use(logger('dev'));
 
 // Get request with product info and return
 app.get('/product/:id', function(req, res){
