@@ -19,6 +19,32 @@ var express = require('express');
 //Set the Variable for Express. 
 var app = express();
 
+var mongoose = require("mongoose");
+
+var Employee = require("./models/employee");
+
+// mLab connection
+
+var mongoDB = "mongodb+srv://admin:5975@buwebdev-cluster-1.levpe.mongodb.net/ems?authSource=admin&replicaSet=atlas-sc0j04-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true";
+
+mongoose.connect(mongoDB, {
+
+});
+
+mongoose.Promise = global.Promise;
+
+var db = mongoose.connection;
+
+db.on("error", console.error.bind(console, "MongoDB connection error: "));
+
+db.once("open", function() {
+
+    console.log("Application connected to MongoDB instance");
+
+});
+
+
+
 //Set the view and view engine.
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -56,33 +82,6 @@ app.get('/list', function(request, response){
     });
 }); 
 
-//get the contact file. 
-app.get('/butler', function(request, response){
-    response.render('butler',{
-        title: "Jimmy Butler"
-    });
-}); 
-
-//get the about file. 
-app.get('/james', function(request, response){
-    response.render('james',{
-        title: "Lebron James"
-    });
-}); 
-
-//get the about file. 
-app.get('/curry', function(request, response){
-    response.render('curry',{
-        title: "Steph Curry"
-    });
-}); 
-
-//get the about file. 
-app.get('/davis', function(request, response){
-    response.render('davis',{
-        title: "Anthony Davis"
-    });
-}); 
 
 //Create server and listen on port 3002.
 http.createServer(app).listen(5000, function() {
