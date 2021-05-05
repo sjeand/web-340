@@ -15,6 +15,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var express = require('express');
+var helmet = require("helmet");
 
 //Set the Variable for Express. 
 var app = express();
@@ -52,12 +53,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Set the logger. 
 app.use(logger('short'));
+app.use(helmet.xssFilter());
 
 
 //get the index file. 
 app.get('/index', function(request, response){
     response.render('index',{
-        title: "Home"
+        message: "XSS Prevention Example"
     });
 }); 
 
