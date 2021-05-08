@@ -1,1 +1,25 @@
+<!--
+=======================================================
+  Title: new.ejs
+  Author: Professor Cross
+  Date: 04/08/2021
+  Modified by: Sarah Jean Baptiste
+  Description: New
+========================================================
+-->
+
 <!--Data Entry Page-->
+
+<!-- CSRF Token in a form. -->
+<div role="main" class="container">
+<br/><br/>
+    <h2><%= message %></h2>
+    <form method="post" action="/submit">
+        <div class="form-group">
+          <input type="text" name="txtName" value="Name:">
+          <input name="_csrf" value="<%= csrfToken %>" type="hidden">
+          <!-- ... -->
+        </div>
+    </form>
+</div>
+  

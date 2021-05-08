@@ -16,11 +16,15 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var express = require('express');
 var helmet = require("helmet");
+var cookieParser = require("cookie-parser");
+var csrf = require("csurf");
 
 //Set the Variable for Express. 
 var app = express();
 
 var mongoose = require("mongoose");
+
+var csrfProtection = csrf({cookie: true});
 
 var Employee = require("./models/employee");
 
@@ -54,9 +58,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Set the logger. 
 app.use(logger('short'));
 app.use(helmet.xssFilter());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(cookieParser());
+
+app.use(csrfProtection);
+
+app.use(function(request, response, next) {
+
+    var token = request.csrfToken();
+
+    response.cookie('XSRF-TOKEN', token);
+
+    response.locals.csrfToken = token;
+
+    next();
+
+});
 
 
-//get the index file. 
+//Routing
 app.get('/index', function(request, response){
     response.render('index',{
         message: "XSS Prevention Example"
@@ -84,6 +106,10 @@ app.get('/list', function(request, response){
     });
 }); 
 
+app.post("/process", function(request, response) {
+    console.log(request.body.txtName);
+    response.redirect("/");
+});
 
 //Create server and listen on port 3002.
 http.createServer(app).listen(5000, function() {
