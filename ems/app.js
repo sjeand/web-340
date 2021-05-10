@@ -28,7 +28,7 @@ var csrfProtection = csrf({cookie: true});
 
 var Employee = require("./models/employee");
 
-// mLab connection
+// mongoose connection
 
 var mongoDB = "mongodb+srv://admin:5975@buwebdev-cluster-1.levpe.mongodb.net/ems?authSource=admin&replicaSet=atlas-sc0j04-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true";
 
@@ -55,33 +55,31 @@ app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Set the logger. 
+//Set the logger and app.use
 app.use(logger('short'));
 app.use(helmet.xssFilter());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cookieParser());
-
 app.use(csrfProtection);
 
+var publicDir = require('path').join(__dirname, '/public');
+app.use(express.static(publicDir));
+
 app.use(function(request, response, next) {
-
     var token = request.csrfToken();
-
     response.cookie('XSRF-TOKEN', token);
-
     response.locals.csrfToken = token;
-
     next();
-
 });
 
 
 //Routing
-app.get('/index', function(request, response){
+app.get('/', function(request, response){
     response.render('index',{
-        message: "XSS Prevention Example"
+        message: "XSS Prevention Example",
+        title: "Home"
     });
 }); 
 
@@ -99,19 +97,62 @@ app.get('/contact', function(request, response){
     });
 }); 
 
-//get the contact file. 
+//get the list file. 
 app.get('/list', function(request, response){
     response.render('list',{
         title: "Employee Records"
     });
 }); 
 
+//get the new file. 
+app.get('/new', function(request, response){
+    response.render('new',{
+        title: "New",
+        message: "Please enter your first and last name..."
+    });
+}); 
+
+// First and last name forms. 
 app.post("/process", function(request, response) {
     console.log(request.body.txtName);
+    if (!request.body.firstName) {
+        response.status(400).send("You must enter a first name.");
+        return; 
+    }
+
+    if (!request.body.lastName) {
+        response.status(400).send("You must enter a last name.");
+        return; 
+    }
+
+    var firstName = request.body.firstName;
+    var lastName = request.body.lastName;
+
+    var employee = new Employee({
+        firstName: firstName,
+        lastName: lastName
+    });
+
+    employee.save(function (error) {
+        if (error) throw error;
+        console.log(firstName + lastName + " your entry is saved!")
+    });
     response.redirect("/");
+
 });
 
-//Create server and listen on port 3002.
+// get list page. 
+app.get("/list", function(request, response) {
+    Employee.find({}, function(error, employees) {
+        if (error) throw error;
+        response.render("list", {
+            title: "Employee List",
+            employees: employees
+        });
+    });
+});
+
+//Create server and listen on port 5000.
 http.createServer(app).listen(5000, function() {
     console.log('Application started and listening on port %s', 5000)
 });
