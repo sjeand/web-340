@@ -1,5 +1,5 @@
 {
-    "name": "if-else-render",
+    "name": "app.js",
     "author": "Sarah Jean Baptiste",
     "private": "true",
     "dependencies": {
@@ -11,5 +11,8 @@
         "helmet": "^4.6.0",
         "mongoose": "^5.12.7",
         "morgan": "^1.10.0"
+    },
+    "scripts": {
+        "start": "node app.js"
     }
 }

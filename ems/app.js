@@ -97,13 +97,6 @@ app.get('/contact', function(request, response){
     });
 }); 
 
-//get the list file. 
-app.get('/list', function(request, response){
-    response.render('list',{
-        title: "Employee Records"
-    });
-}); 
-
 //get the new file. 
 app.get('/new', function(request, response){
     response.render('new',{
@@ -152,7 +145,26 @@ app.get("/list", function(request, response) {
     });
 });
 
+var employee = new Employee;
+
+app.get("/view/:queryName", function(request, response) {
+    var queryName = request.params.queryName;
+  
+    Employee.find({'firstName': queryName}, function(error, employees) {
+        if (error) throw error;
+        if (employees.length > 0) {
+            response.render('view', {
+                title: 'EMS | View',
+                employee: employees
+            })
+        }
+        else {
+          response.redirect('/list');
+        }
+    });
+  });
+
 //Create server and listen on port 5000.
-http.createServer(app).listen(5000, function() {
-    console.log('Application started and listening on port %s', 5000)
+http.createServer(app).listen(process.env.PORT || 5000, function() {
+    console.log('Application started and listening on port %s', process.env.PORT || 5000)
 });
