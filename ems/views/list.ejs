@@ -9,8 +9,8 @@
 -->
 
 <!--Tabular View of employee records-->
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- Include header. -->
@@ -20,12 +20,18 @@
     <!-- Include navbar. -->
     <%- include('navbar'); -%>
 
+    <!-- Container to hold all content. -->
     <div role="main" class="container">
-        <br/><br/>
+    <br/><br/>
+
     <% if (employees.length) { %>
 
         <h2>‐‐ Employee Listing ‐‐</h2><br />
+
+        <!-- Add new link to add new employee. -->
         <a href="/new">Add New</a>
+
+        <!-- Create table to show current employees. -->
         <table class="table table‐hover">
             <thead class="thead‐dark">
                 <tr>
@@ -39,11 +45,13 @@
                 <tr>
                     <td><%= entry.firstName %></td>
                     <td><%= entry.lastName %></td>
-                    <td><a href="/view">VIEW</a></td>
+                    <td><a href="/view/<%= entry.firstName %>">VIEW</a></td>
                 </tr>
                 <% }) %>
             </tbody>                
         </table>
+
+    <!-- No entries, go to add new page. -->
     <% } else { %>
         No entries! <a href="/new">Add one!</a>
     <% } %>

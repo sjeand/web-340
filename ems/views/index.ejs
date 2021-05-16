@@ -4,7 +4,7 @@
   Author: Professor Cross
   Date: 03/27/2021
   Modified by: Sarah Jean Baptiste
-  Description: Index for jeanBaptiste-assignment-2.4.js
+  Description: Index for EMS
 ========================================================
 -->
 
@@ -14,15 +14,23 @@
 <!--Include main navbar-->
 <%- include ('navbar'); %>
 
+<!--Div for all content-->
+
+<!--Hero Image with title-->
 <div class="hero-image">
   <div class="hero-text">
     <h1 style="font-size: 45px;">Jean Baptiste's Arboretum</h1>
   </div>
 </div>
+
+<!--Main Heading and main content-->
 <h3 style="margin-left: 10%; margin-top: 20px;">Welcome to the <span style= "font-family: Sacramento, cursive; font-size: 40px;">Jean Baptiste's Arboretum:</span></h3>
 <p style="margin-left: 10%; margin-right: 10%; margin-top: 10px; font-style: italic;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis. Eu augue ut lectus arcu bibendum at varius vel. Erat velit scelerisque in dictum non consectetur a erat. Dolor sit amet consectetur adipiscing elit duis tristique. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna. Nunc lobortis mattis aliquam faucibus purus in massa tempor nec. Diam ut venenatis tellus in metus vulputate eu. Phasellus vestibulum lorem sed risus ultricies. Amet risus nullam eget felis eget nunc lobortis mattis aliquam. Tellus integer feugiat scelerisque varius morbi enim. Viverra maecenas accumsan lacus vel facilisis volutpat est velit egestas.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<!--Container to hold 3 columns -->
 <div class="container">
   <div class="row align-items-start">
+    <!--Left column for Gardening/Landscaping and shop now button-->
     <div class="col">
       <p class='text-uppercase' style="text-align: center; margin-top: 20px; font-weight:bold;">Gardening & Landscaping</p>
       <img src="../garden.jpg" class="rounded img-fluid img-thumbnail" alt="...">
@@ -30,6 +38,7 @@
         <button type="button" class="btn btn-dark" style="margin-top: 10px;">Shop Now</button>
       </div>
     </div>
+    <!--Middle column for Indoor/tropical and shop now button-->
     <div class="col">
       <p class='text-uppercase' style="text-align: center; margin-top: 20px; font-weight:bold;">Indoor & Tropical Plants</p>
       <img src="../houseplants.jpg" class="rounded img-fluid img-thumbnail" alt="...">
@@ -37,6 +46,7 @@
         <button type="button" class="btn btn-dark" style="margin-top: 10px;">Shop Now</button>
       </div>
     </div>
+    <!--Right column for Succulent/Cacti and shop now button-->
     <div class="col">
       <p class='text-uppercase' style="text-align: center; margin-top: 20px; font-weight:bold;">Succulents & Cacti</p>
       <img src="../succulents.jpg" class="rounded img-fluid img-thumbnail" alt="...">
@@ -47,11 +57,10 @@
   </div>
 </div>
 
-<!-- Include footer header is going above the table? -->
+<!-- Include footer -->
 <div>
   <%- include ('footer'); -%> 
 </div>
-
 
 </body>  
 
